@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<!-- 配置驱动 -->
+	 <classPathEntry location="E:\javakfhj\SSM\Maven\Maven_Respository\mavenRespository\mysql\mysql-connector-java\5.1.17\mysql-connector-java-5.1.17.jar"/>	
+  <context id="context1" >
+  	<commentGenerator>
+           <property name="suppressDate" value="true"/>  
+           <!-- 是否去除自动生成的注释 true：是 ： false:否 -->  
+           <property name="suppressAllComments" value="true"/>  
+	</commentGenerator>
+	
+    <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/housewife" userId="root" password="root" />
+    <!-- 生成实体类 实体bean文件 -->	
+    <javaModelGenerator targetPackage="com.fs.model" targetProject="ssm_graduateProject" />
+  	<!-- mapper xml文件 -->
+    <sqlMapGenerator targetPackage="com.fs.mapper.xml" targetProject="ssm_graduateProject" />
+   	<!-- mapper 接口文件 -->
+    <javaClientGenerator targetPackage="com.fs.mapper" targetProject="ssm_graduateProject" type="XMLMAPPER" />
+     
+   <!-- 具体映射表 -->
+   
+   	<table tableName="log" domainObjectName="Log" 
+		enableCountByExample="false" enableUpdateByExample="false"
+		 enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>
+
+ 				<!-- audit表映射 -->
+	<!-- 	<table tableName="audit" domainObjectName="Audit" 
+		enableCountByExample="false" enableUpdateByExample="false"
+		 enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>
+		 
+		 department表映射
+		 <table tableName="department" domainObjectName="Department" 
+		enableCountByExample="false" enableUpdateByExample="false"
+		 enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>
+		 
+		 financial表映射
+		 <table tableName="financial" domainObjectName="Financial" 
+		enableCountByExample="false" enableUpdateByExample="false"
+		 enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>
+		 
+		 
+		 function表映射
+		 <table tableName="function" domainObjectName="Function" 
+		enableCountByExample="false" enableUpdateByExample="false"
+		 enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>
+		 
+		 order表映射
+		 <table tableName="order" domainObjectName="Order" 
+		enableCountByExample="false" enableUpdateByExample="false"
+		 enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>
+		 
+		 product表映射
+		 <table tableName="product" domainObjectName="Product" 
+		enableCountByExample="false" enableUpdateByExample="false"
+		 enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>
+		 
+		 role表映射
+		 <table tableName="role" domainObjectName="Role" 
+		enableCountByExample="false" enableUpdateByExample="false"
+		 enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>
+		 
+		 supplier表映射
+		 <table tableName="supplier" domainObjectName="Supplier" 
+		enableCountByExample="false" enableUpdateByExample="false"
+		 enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table>
+		 
+		 user表映射
+		 <table tableName="user" domainObjectName="User" 
+		enableCountByExample="false" enableUpdateByExample="false"
+		 enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" ></table> -->
+
+ </context>
+</generatorConfiguration>
+
+<!--********************************************************mybatis的逆向工程*************************************************************************************  -->

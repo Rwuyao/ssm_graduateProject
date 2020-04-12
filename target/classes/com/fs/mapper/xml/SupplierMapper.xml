@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fs.mapper.SupplierMapper">
+  <resultMap id="BaseResultMap" type="com.fs.model.Supplier">
+    <id column="supplier_id" jdbcType="INTEGER" property="supplierId" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="wner" jdbcType="VARCHAR" property="wner" />
+    <result column="adress" jdbcType="VARCHAR" property="adress" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="des" jdbcType="VARCHAR" property="des" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    supplier_id, company, wner, adress, telephone, des
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from supplier
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from supplier
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fs.model.Supplier">
+    insert into supplier (supplier_id, company, wner, 
+      adress, telephone, des
+      )
+    values (#{supplierId,jdbcType=INTEGER}, #{company,jdbcType=VARCHAR}, #{wner,jdbcType=VARCHAR}, 
+      #{adress,jdbcType=VARCHAR}, #{telephone,jdbcType=VARCHAR}, #{des,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fs.model.Supplier">
+    insert into supplier
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="supplierId != null">
+        supplier_id,
+      </if>
+      <if test="company != null">
+        company,
+      </if>
+      <if test="wner != null">
+        wner,
+      </if>
+      <if test="adress != null">
+        adress,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="des != null">
+        des,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="supplierId != null">
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="company != null">
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="wner != null">
+        #{wner,jdbcType=VARCHAR},
+      </if>
+      <if test="adress != null">
+        #{adress,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null">
+        #{des,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fs.model.Supplier">
+    update supplier
+    <set>
+      <if test="company != null">
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="wner != null">
+        wner = #{wner,jdbcType=VARCHAR},
+      </if>
+      <if test="adress != null">
+        adress = #{adress,jdbcType=VARCHAR},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null">
+        des = #{des,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fs.model.Supplier">
+    update supplier
+    set company = #{company,jdbcType=VARCHAR},
+      wner = #{wner,jdbcType=VARCHAR},
+      adress = #{adress,jdbcType=VARCHAR},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      des = #{des,jdbcType=VARCHAR}
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </update>
+  <select id="supplier_info" parameterType="java.util.List" resultMap="BaseResultMap">
+  select * from supplier limit #{start},#{row}
+  </select>
+  <select id="supplier_info2" parameterType="java.util.List" resultMap="BaseResultMap">
+  select * from supplier
+  </select>
+  <select id="supplier_infoPageCount" resultType="java.lang.Integer">
+  select count(*) from supplier
+  
+  </select>
+  <delete id="Q_deleteSupMessage">
+  delete from supplier where supplier_id =#{supplierId}
+  </delete>
+  <select id="Q_selectSupplier" resultType="com.fs.model.Supplier">
+  select * from supplier where supplier_id =#{supplierId}
+  </select>
+  
+  <update id="Q_SupUpdateByMess" parameterType="com.fs.model.Supplier">
+  update supplier set company=#{company},wner=#{wner},adress=#{adress},telephone=#{telephone},des=#{des} where supplier_id=#{supplierId}
+  </update>
+  <insert id="Q_SuppInsertByMess" parameterType="com.fs.model.Supplier">
+  insert into supplier(company,wner,adress,telephone,des) values(#{company},#{wner},#{adress},#{telephone},#{des})
+  </insert>
+  <select id="Q_SupSelectMessage" parameterType="java.util.List" resultMap="BaseResultMap">
+  select * from supplier where 1=1
+  <if test="_parameter!='' and _parameter!=null">
+  and company like #{_parameter} or wner like #{_parameter} or adress like #{_parameter} or telephone like #{_parameter} or des like #{_parameter}
+  </if>
+  </select>
+</mapper>

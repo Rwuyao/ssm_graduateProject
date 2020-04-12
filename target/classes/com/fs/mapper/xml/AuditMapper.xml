@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fs.mapper.AuditMapper">
+  <resultMap id="BaseResultMap" type="com.fs.model.Audit">
+    <id column="audit_id" jdbcType="INTEGER" property="auditId" />
+    <result column="dep_send" jdbcType="VARCHAR" property="depSend" />
+    <result column="dep_receve" jdbcType="VARCHAR" property="depReceve" />
+    <result column="people_send" jdbcType="VARCHAR" property="peopleSend" />
+    <result column="first_check" jdbcType="VARCHAR" property="firstCheck" />
+    <result column="scond_check" jdbcType="VARCHAR" property="scondCheck" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <result column="becauser" jdbcType="VARCHAR" property="becauser" />
+    <result column="product_name" jdbcType="VARCHAR" property="productName" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="custmer" jdbcType="VARCHAR" property="custmer" />
+    <result column="order_id" jdbcType="INTEGER" property="orderId" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="sta" jdbcType="VARCHAR" property="sta" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    audit_id, dep_send, dep_receve, people_send, first_check, scond_check, state, becauser, 
+    product_name, price, number, custmer, order_id, time, sta
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from audit
+    where audit_id = #{auditId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from audit
+    where audit_id = #{auditId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fs.model.Audit">
+    insert into audit (audit_id, dep_send, dep_receve, 
+      people_send, first_check, scond_check, 
+      state, becauser, product_name, 
+      price, number, custmer, 
+      order_id, time, sta
+      )
+    values (#{auditId,jdbcType=INTEGER}, #{depSend,jdbcType=VARCHAR}, #{depReceve,jdbcType=VARCHAR}, 
+      #{peopleSend,jdbcType=VARCHAR}, #{firstCheck,jdbcType=VARCHAR}, #{scondCheck,jdbcType=VARCHAR}, 
+      #{state,jdbcType=VARCHAR}, #{becauser,jdbcType=VARCHAR}, #{productName,jdbcType=VARCHAR}, 
+      #{price,jdbcType=VARCHAR}, #{number,jdbcType=INTEGER}, #{custmer,jdbcType=VARCHAR}, 
+      #{orderId,jdbcType=INTEGER}, #{time,jdbcType=TIMESTAMP}, #{sta,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fs.model.Audit">
+    insert into audit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="auditId != null">
+        audit_id,
+      </if>
+      <if test="depSend != null">
+        dep_send,
+      </if>
+      <if test="depReceve != null">
+        dep_receve,
+      </if>
+      <if test="peopleSend != null">
+        people_send,
+      </if>
+      <if test="firstCheck != null">
+        first_check,
+      </if>
+      <if test="scondCheck != null">
+        scond_check,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="becauser != null">
+        becauser,
+      </if>
+      <if test="productName != null">
+        product_name,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="custmer != null">
+        custmer,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="sta != null">
+        sta,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="auditId != null">
+        #{auditId,jdbcType=INTEGER},
+      </if>
+      <if test="depSend != null">
+        #{depSend,jdbcType=VARCHAR},
+      </if>
+      <if test="depReceve != null">
+        #{depReceve,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleSend != null">
+        #{peopleSend,jdbcType=VARCHAR},
+      </if>
+      <if test="firstCheck != null">
+        #{firstCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="scondCheck != null">
+        #{scondCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="becauser != null">
+        #{becauser,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="custmer != null">
+        #{custmer,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sta != null">
+        #{sta,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fs.model.Audit">
+    update audit
+    <set>
+      <if test="depSend != null">
+        dep_send = #{depSend,jdbcType=VARCHAR},
+      </if>
+      <if test="depReceve != null">
+        dep_receve = #{depReceve,jdbcType=VARCHAR},
+      </if>
+      <if test="peopleSend != null">
+        people_send = #{peopleSend,jdbcType=VARCHAR},
+      </if>
+      <if test="firstCheck != null">
+        first_check = #{firstCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="scondCheck != null">
+        scond_check = #{scondCheck,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="becauser != null">
+        becauser = #{becauser,jdbcType=VARCHAR},
+      </if>
+      <if test="productName != null">
+        product_name = #{productName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="custmer != null">
+        custmer = #{custmer,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sta != null">
+        sta = #{sta,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where audit_id = #{auditId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fs.model.Audit">
+    update audit
+    set dep_send = #{depSend,jdbcType=VARCHAR},
+      dep_receve = #{depReceve,jdbcType=VARCHAR},
+      people_send = #{peopleSend,jdbcType=VARCHAR},
+      first_check = #{firstCheck,jdbcType=VARCHAR},
+      scond_check = #{scondCheck,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      becauser = #{becauser,jdbcType=VARCHAR},
+      product_name = #{productName,jdbcType=VARCHAR},
+      price = #{price,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      custmer = #{custmer,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=INTEGER},
+      time = #{time,jdbcType=TIMESTAMP},
+      sta = #{sta,jdbcType=VARCHAR}
+    where audit_id = #{auditId,jdbcType=INTEGER}
+  </update>
+</mapper>

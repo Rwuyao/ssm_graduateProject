@@ -1,0 +1,596 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fs.mapper.ProductMapper">
+  <resultMap id="BaseResultMap" type="com.fs.model.Product">
+    <id column="pro_id" jdbcType="INTEGER" property="proId" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="bround" jdbcType="VARCHAR" property="bround" />
+    <result column="catagorg" jdbcType="VARCHAR" property="catagorg" />
+    <result column="des" jdbcType="VARCHAR" property="des" />
+    <result column="cost" jdbcType="VARCHAR" property="cost" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pro_id, picture, name, bround, catagorg, des, cost, price, supplier_id, date, number
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where pro_id = #{proId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from product
+    where pro_id = #{proId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fs.model.Product">
+    insert into product (pro_id, picture, name, 
+      bround, catagorg, des, 
+      cost, price, supplier_id, 
+      date, number)
+    values (#{proId,jdbcType=INTEGER}, #{picture,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{bround,jdbcType=VARCHAR}, #{catagorg,jdbcType=VARCHAR}, #{des,jdbcType=VARCHAR}, 
+      #{cost,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, #{supplierId,jdbcType=INTEGER}, 
+      #{date,jdbcType=TIMESTAMP}, #{number,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fs.model.Product">
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="proId != null">
+        pro_id,
+      </if>
+      <if test="picture != null">
+        picture,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="bround != null">
+        bround,
+      </if>
+      <if test="catagorg != null">
+        catagorg,
+      </if>
+      <if test="des != null">
+        des,
+      </if>
+      <if test="cost != null">
+        cost,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="supplierId != null">
+        supplier_id,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="proId != null">
+        #{proId,jdbcType=INTEGER},
+      </if>
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="bround != null">
+        #{bround,jdbcType=VARCHAR},
+      </if>
+      <if test="catagorg != null">
+        #{catagorg,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null">
+        #{des,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null">
+        #{cost,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null">
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fs.model.Product">
+    update product
+    <set>
+      <if test="picture != null">
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="bround != null">
+        bround = #{bround,jdbcType=VARCHAR},
+      </if>
+      <if test="catagorg != null">
+        catagorg = #{catagorg,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null">
+        des = #{des,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null">
+        cost = #{cost,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null">
+        supplier_id = #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
+      </if>
+    </set>
+    where pro_id = #{proId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fs.model.Product">
+    update product
+    set picture = #{picture,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      bround = #{bround,jdbcType=VARCHAR},
+      catagorg = #{catagorg,jdbcType=VARCHAR},
+      des = #{des,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=VARCHAR},
+      price = #{price,jdbcType=VARCHAR},
+      supplier_id = #{supplierId,jdbcType=INTEGER},
+      date = #{date,jdbcType=TIMESTAMP},
+      number = #{number,jdbcType=INTEGER}
+    where pro_id = #{proId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="queryAllProduct" resultMap="ret">
+  
+ SELECT
+*
+FROM
+product
+INNER JOIN supplier ON product.supplier_id = supplier.supplier_id
+order by date DESC
+  
+  </select>
+  
+  <resultMap type="com.fs.model.Product" id="ret">
+  <id        property="proId"   column="pro_id"/>
+  <result property="picture"  column="picture"/>
+  <result property="name"  column="name"/>
+  <result property="bround"  column="bround"/>
+  <result property="catagorg"  column="catagorg"/>
+  <result property="des"  column="des"/>
+  <result property="cost"  column="cost"/>
+  <result property="price"  column="price"/>
+  <result property="supplierId"  column="supplier_id"/>
+  <result property="date"  column="date"/>
+  <result property="number"  column="number"/>
+  <result property="state"  column="state"/>
+  <collection property="supplier" javaType="com.fs.model.Supplier">
+  <id column="supplier_id" property="supplierId"/>
+  <result property="company"  column="company"/>
+  <result property="wner"  column="wner"/>
+  <result property="adress"  column="adress"/>
+  <result property="telephone"  column="telephone"/>
+  </collection>
+  
+  
+  
+  </resultMap>
+  
+ <select  id="queryAllsupplier"  resultType="com.fs.model.Supplier">
+  select supplier_id as supplierId ,company  from supplier
+  </select>
+  
+  <insert id="addproductApply" >   
+  
+insert into audit(first_check,dep_send,dep_receve,people_send,state,product_name,price,number,time,sta) values('Boss','仓库部','boss',#{name},'审核中',#{product_name},#{price},#{number},now(),0)
+  </insert>
+  
+  <select id="queryAuditByid" resultType="com.fs.model.Audit">
+  
+  select product_name as productName ,number,price  from audit where dep_send='仓库部' and state='已通过' and audit_id=#{auditId} and sta='1'
+  
+  </select>
+  
+  <select id="queryAllsupplier2" resultType="com.fs.model.Supplier">
+  select supplier_id as supplierId ,company  from supplier
+  </select>
+  
+ <insert id="insertintoproduct">
+ insert into product(picture,name,bround,catagorg,des,cost,price,supplier_id,date,number,state)values(#{picture},#{product.name},#{product.bround},#{product.catagorg},#{product.des},#{product.cost},#{product.price},#{product.supplierId},now(),#{product.number},'销售中')
+ </insert>
+
+<update id="deleteproduct">
+update product set state='暂停销售' where pro_id=#{proId}
+</update>
+ 
+  <update id="addproduct">
+update product set state='销售中' where pro_id=#{proId}
+</update>
+  
+ <select id="queryAuditbyxiaoshoubu" resultMap="rett">
+ SELECT
+audit.audit_id,
+audit.people_send,
+audit.product_name,
+audit.price,
+audit.number as number2 ,
+audit.custmer,
+audit.order_id,
+audit.time,
+audit.sta,
+product.picture,
+product.pro_id,
+product.number
+FROM
+audit
+LEFT JOIN product ON audit.product_name = product.`name` where audit.dep_send='销售部' and audit.state='已通过' 
+order by sta ASC
+</select>
+
+ <resultMap type="com.fs.model.Audit" id="rett">
+  <id        property="auditId"       column="audit_id" />
+  <result property="peopleSend"  column="people_send"/>
+  <result property="productName"  column="product_name"/>
+  <result property="price"  column="price"/>
+  <result property="number"  column="number2"/>
+  <result property="custmer"  column="custmer"/>
+  <result property="orderId"  column="order_id"/>
+  <result property="time"  column="time"/>
+  <result property="sta"  column="sta"/>
+  <collection property="product" javaType="com.fs.model.Product">
+  <id        property="proId"       column="pro_id" />
+  <result property="picture"  column="picture"/>
+  <result property="number"  column="number"/>
+  </collection>
+  
+  
+  
+  </resultMap>
+  
+  <update id="updateProductByName">
+  update product set number=#{number}  where name=#{name}
+  </update>
+  
+  <update id="xiugaichukuzhuangtai">
+  update audit set sta='3'  where product_name=#{name} and audit_id=#{auditId}
+  </update>
+  
+  <select id="queryProductIsNOTorYes" resultType="com.fs.model.Product">
+  select * from product where name=#{product.name}
+  
+  
+  </select>
+  
+  <update id="addnumberfromprodecut">
+  
+   update product set number=#{number}  where name=#{product.name}
+  </update>
+  
+  <insert id="insertIntoWIfeLog">
+  insert into warehouse_log(name,number,persson,audit_id,date,state) values(#{product.name},#{product.number},#{username},#{audii_id},now(),'入库')
+  </insert>
+  
+   <insert id="insertIntoWIfeLog2">
+  insert into warehouse_log(name,number,persson,audit_id,date,state) values(#{name},#{number},#{username},#{auditid},now(),'出库')
+  </insert>
+  
+  
+  
+  
+  
+ <select id="selectprodunct"  resultType="com.fs.model.Product">
+  
+ SELECT
+product.pro_id as proId,
+product.picture,
+product.`name`,
+product.bround,
+product.catagorg,
+product.des,
+product.cost,
+product.price,
+product.supplier_id,
+product.date,
+product.number,
+product.state
+FROM
+product
+
+  <where>
+<if test="time1!=null and time1!='' and time2!=null and  time2!=''">
+state like #{state} and (date between #{time1} and #{time2})
+</if>
+<if test="time1!=null and time1!='' and time2==null or time2==''">
+state like #{state} and date &gt; #{time1}
+</if>
+<if test="time1==null or time1=='' and time2!=null and time2!=''">
+state like #{state} and date &lt; #{time2}
+</if>
+  </where>
+  </select>
+  
+ 
+  
+  
+  <select id="selectprodunct2"  resultType="com.fs.model.Product">
+  
+  
+ SELECT
+product.pro_id as proId,
+product.picture,
+product.`name`,
+product.bround,
+product.catagorg,
+product.des,
+product.cost,
+product.price,
+product.supplier_id,
+product.date,
+product.number,
+product.state
+FROM
+product
+  <where>
+<if test="time1!=null and time1!='' and time2!=null and  time2!=''">
+ (date between #{time1} and #{time2})
+</if>
+<if test="time1!=null and time1!='' and time2==null or time2==''">
+ date &gt; #{time1}
+</if>
+<if test="time1==null or time1=='' and time2!=null and time2!=''">
+date &lt; #{time2}
+</if>
+
+
+  
+  </where>
+  
+  </select>
+  
+  
+  <select id="selectoutproduct"  resultMap="rety">
+  
+  SELECT
+audit.audit_id,
+audit.people_send,
+audit.product_name,
+audit.price,
+audit.number as number2 ,
+audit.custmer,
+audit.order_id,
+audit.time,
+audit.sta,
+product.picture,
+product.pro_id,
+product.number
+FROM
+audit
+LEFT JOIN product ON audit.product_name = product.`name` 
+
+ 
+  <where>
+<if test="time1!=null and time1!='' and time2!=null and  time2!=''">
+audit.dep_send='销售部' and audit.state='已通过'    and  (audit.time between #{time1} and #{time2}  )  and (audit.sta=#{sta} )order by audit.sta ASC 
+</if>
+ <if test="time1!=null and time1!='' and time2==null or time2==''">
+ audit.dep_send='销售部' and audit.state='已通过'   and (audit.time &gt; #{time1})  and audit.sta=#{sta}  order by audit.sta ASC
+</if>
+<if test="time1==null or time1=='' and time2!=null and time2!=''">
+ audit.dep_send='销售部' and audit.state='已通过'   and (audit.time &lt; #{time2})  and audit.sta=#{sta}  order by audit.sta ASC
+</if> 
+  </where>
+  
+  </select>
+  
+  
+  
+  <resultMap type="com.fs.model.Audit" id="rety">
+  <id        property="auditId"       column="audit_id" />
+  <result property="peopleSend"  column="people_send"/>
+  <result property="productName"  column="product_name"/>
+  <result property="price"  column="price"/>
+  <result property="number"  column="number2"/>
+  <result property="custmer"  column="custmer"/>
+  <result property="orderId"  column="order_id"/>
+  <result property="time"  column="time"/>
+  <result property="sta"  column="sta"/>
+  <collection property="product" javaType="com.fs.model.Product">
+  <id        property="proId"       column="pro_id" />
+  <result property="picture"  column="picture"/>
+  <result property="number"  column="number"/>
+  </collection>
+  
+  
+  
+  </resultMap>
+  
+  
+  <select id="selectoutproduct2"  resultMap="retyy">
+  
+   SELECT
+audit.audit_id,
+audit.people_send,
+audit.product_name,
+audit.price,
+audit.number as number2 ,
+audit.custmer,
+audit.order_id,
+audit.time,
+audit.sta,
+product.picture,
+product.pro_id,
+product.number
+FROM
+audit
+LEFT JOIN product ON audit.product_name = product.`name` 
+  
+  
+  
+  
+  <where>
+<if test="time1!=null and time1!='' and time2!=null and  time2!=''">
+audit.dep_send='销售部' and audit.state='已通过'    and  (audit.time between #{time1} and #{time2}  )  order by audit.sta ASC 
+</if>
+ <if test="time1!=null and time1!='' and time2==null or time2==''">
+ audit.dep_send='销售部' and audit.state='已通过'   and (audit.time &gt; #{time1})   order by audit.sta ASC
+</if>
+<if test="time1==null or time1=='' and time2!=null and time2!=''">
+ audit.dep_send='销售部' and audit.state='已通过'   and (audit.time &lt; #{time2})   order by audit.sta ASC
+</if> 
+  </where>
+  
+  
+
+  </select>
+  
+  <resultMap type="com.fs.model.Audit" id="retyy">
+  <id        property="auditId"       column="audit_id" />
+  <result property="peopleSend"  column="people_send"/>
+  <result property="productName"  column="product_name"/>
+  <result property="price"  column="price"/>
+  <result property="number"  column="number2"/>
+  <result property="custmer"  column="custmer"/>
+  <result property="orderId"  column="order_id"/>
+  <result property="time"  column="time"/>
+  <result property="sta"  column="sta"/>
+  <collection property="product" javaType="com.fs.model.Product">
+  <id        property="proId"       column="pro_id" />
+  <result property="picture"  column="picture"/>
+  <result property="number"  column="number"/>
+  </collection>
+  
+  
+  
+  </resultMap>
+  
+  <select id="queryAllLog" resultType="com.fs.model.Warehouse_log">
+  select * from warehouse_log order by date DESC
+  </select>
+ <select id="selectmyAudit" resultType="com.fs.model.Audit" >
+SELECT
+audit.audit_id as auditId,
+audit.dep_send as depSend,
+audit.dep_receve as depReceve,
+audit.people_send as peopleSend,
+audit.first_check as firstCheck,
+audit.scond_check as scondCheck,
+audit.state,
+audit.becauser,
+audit.product_name as productName,
+audit.price,
+audit.number,
+audit.custmer,
+audit.order_id as orderId,
+audit.time,
+audit.sta
+FROM
+audit where audit.dep_send='仓库部'
+
+ </select>
+
+  
+  <select id="selectheAudit" resultType="com.fs.model.Audit" >
+SELECT
+audit.audit_id as auditId,
+audit.dep_send as depSend,
+audit.dep_receve as depReceve,
+audit.people_send as peopleSend,
+audit.first_check as firstCheck,
+audit.scond_check as scondCheck,
+audit.state,
+audit.becauser,
+audit.product_name as productName,
+audit.price,
+audit.number,
+audit.custmer,
+audit.order_id as orderId,
+audit.time,
+audit.sta
+FROM
+audit where audit.dep_send='销售部' and audit.first_check is null order by time DESC
+
+ </select>
+ 
+ <update id="yespass">
+ update  audit set first_check=#{username} ,state='审核中' ,audit.dep_receve='财务部' where audit_id=#{audit_id}
+ </update>
+ 
+ <select id="selectheAudit2" resultType="com.fs.model.Audit" >
+SELECT
+audit.audit_id as auditId,
+audit.dep_send as depSend,
+audit.dep_receve as depReceve,
+audit.people_send as peopleSend,
+audit.first_check as firstCheck,
+audit.scond_check as scondCheck,
+audit.state,
+audit.becauser,
+audit.product_name as productName,
+audit.price,
+audit.number,
+audit.custmer,
+audit.order_id as orderId,
+audit.time,
+audit.sta
+FROM
+audit where audit.dep_send='销售部'  and ( audit.state in ('已通过' ,'未通过', '审核中')) order by time DESC
+
+ </select>
+ 
+ <update id="nopass">
+ update  audit set first_check=#{username} ,state='未通过'  where audit_id=#{audit_id}
+ </update>
+  
+  <select id="queryProductByProId"  resultType="com.fs.model.Product" >
+ SELECT
+product.pro_id as proId,
+product.picture,
+product.`name`,
+product.bround,
+product.catagorg,
+product.des,
+product.cost,
+product.price,
+product.supplier_id,
+product.date,
+product.number,
+product.state
+FROM
+product
+ where pro_id=#{pro_id}
+  </select>
+  
+  <update id="updateProductByProId">
+  
+  update product set name=#{name},price=#{price},des=#{des} where pro_id=#{pro_id}
+  
+  
+</update>
+<update id="updateAuditSta">
+update audit set sta='3' where audit_id=#{audii_id}
+</update>
+  
+ 
+  
+</mapper>

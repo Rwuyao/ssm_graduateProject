@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fs.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.fs.model.User">
+    <id column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="dep_id" jdbcType="INTEGER" property="depId" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="telephone" jdbcType="VARCHAR" property="telephone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="adress" jdbcType="VARCHAR" property="adress" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, username, password, name, dep_id, role_id, telephone, email, adress
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where user_id = #{userId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fs.model.User">
+    insert into user (user_id, username, password, 
+      name, dep_id, role_id, 
+      telephone, email, adress
+      )
+    values (#{userId,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{depId,jdbcType=INTEGER}, #{roleId,jdbcType=INTEGER}, 
+      #{telephone,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{adress,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.fs.model.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="depId != null">
+        dep_id,
+      </if>
+      <if test="roleId != null">
+        role_id,
+      </if>
+      <if test="telephone != null">
+        telephone,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="adress != null">
+        adress,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="depId != null">
+        #{depId,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="telephone != null">
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="adress != null">
+        #{adress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fs.model.User">
+    update user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="depId != null">
+        dep_id = #{depId,jdbcType=INTEGER},
+      </if>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=INTEGER},
+      </if>
+      <if test="telephone != null">
+        telephone = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="adress != null">
+        adress = #{adress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fs.model.User">
+    update user
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      dep_id = #{depId,jdbcType=INTEGER},
+      role_id = #{roleId,jdbcType=INTEGER},
+      telephone = #{telephone,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      adress = #{adress,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  
+  
+  <select id="getUserByUserName" resultMap="BaseResultMap">
+  		select * from user where username=#{username}
+  </select>
+  
+  <select id="searchRole" parameterType="java.lang.String" resultType="java.lang.String">
+  	SELECT role.name FROM role 
+	RIGHT OUTER  JOIN user_role ON role.role_id= user_role.role_id 
+	INNER JOIN user on user.user_id=user_role.user_id 
+	WHERE user.username=#{userName}
+  </select>
+  
+  
+  <!-- 显示员工列表 queryAllUser-->
+  <select id="queryAllUser" resultMap="BaseResultMap">
+  	select  <include refid="Base_Column_List" />
+  	from `user` 
+  
+  </select>
+  
+  <!-- 新增员工信息 -->
+  <insert id="addEmployee">
+  		insert into `user` (user_id,username,password,name,dep_id,role_id,telephone,email,adress)
+  		values
+  		(#{userId},#{username},#{md5},#{name},#{depId},1,#{tel},#{email},#{address})
+  </insert>
+  
+  <!-- 删除对应id 的员工 -->
+  <delete id="deleteEmployeeById" parameterType="java.lang.Integer">
+  		delete from `user` where user_id = #{userId}
+  </delete>
+  
+  <!-- 修改员工信息 -->
+  <update id="updateEmployee">
+  		update `user` set username = #{updateusername},
+  			name = #{updatename},
+  			dep_id = #{updatedepId},
+  			telephone = #{updatetelephone},
+  			email = #{updateemail},
+  			adress = #{updateadress} 
+  		where user_id = #{updateuserId}
+  </update>
+  
+  <!-- 查询员工信息queryEmployee-->
+  <select id="queryEmployee" parameterType="java.lang.String" resultMap="BaseResultMap">
+  			select  <include refid="Base_Column_List" />
+  			from `user` where name like #{keyword}
+  </select>
+  
+  <!-- 自动补全搜索 -->
+  <select id="queryName" resultType="java.lang.String">
+  		select name from `user`
+  </select>
+  
+  
+</mapper>

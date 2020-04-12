@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fs.mapper.Q_ProductMapper">
+  <resultMap id="BaseResultMap" type="com.fs.model.Product">
+    <id column="pro_id" jdbcType="INTEGER" property="proId" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="bround" jdbcType="VARCHAR" property="bround" />
+    <result column="catagorg" jdbcType="VARCHAR" property="catagorg" />
+    <result column="des" jdbcType="VARCHAR" property="des" />
+    <result column="cost" jdbcType="VARCHAR" property="cost" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
+    <result column="supplier_id" jdbcType="INTEGER" property="supplierId" />
+    <result column="date" jdbcType="TIMESTAMP" property="date" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    pro_id, picture, name, bround, catagorg, des, cost, price, supplier_id, date, number
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from product
+    where pro_id = #{proId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from product
+    where pro_id = #{proId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fs.model.Product">
+    insert into product (pro_id, picture, name, 
+      bround, catagorg, des, 
+      cost, price, supplier_id, 
+      date, number)
+    values (#{proId,jdbcType=INTEGER}, #{picture,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{bround,jdbcType=VARCHAR}, #{catagorg,jdbcType=VARCHAR}, #{des,jdbcType=VARCHAR}, 
+      #{cost,jdbcType=VARCHAR}, #{price,jdbcType=VARCHAR}, #{supplierId,jdbcType=INTEGER}, 
+      #{date,jdbcType=TIMESTAMP}, #{number,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fs.model.Product">
+    insert into product
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="proId != null">
+        pro_id,
+      </if>
+      <if test="picture != null">
+        picture,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="bround != null">
+        bround,
+      </if>
+      <if test="catagorg != null">
+        catagorg,
+      </if>
+      <if test="des != null">
+        des,
+      </if>
+      <if test="cost != null">
+        cost,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="supplierId != null">
+        supplier_id,
+      </if>
+      <if test="date != null">
+        date,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="proId != null">
+        #{proId,jdbcType=INTEGER},
+      </if>
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="bround != null">
+        #{bround,jdbcType=VARCHAR},
+      </if>
+      <if test="catagorg != null">
+        #{catagorg,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null">
+        #{des,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null">
+        #{cost,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null">
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fs.model.Product">
+    update product
+    <set>
+      <if test="picture != null">
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="bround != null">
+        bround = #{bround,jdbcType=VARCHAR},
+      </if>
+      <if test="catagorg != null">
+        catagorg = #{catagorg,jdbcType=VARCHAR},
+      </if>
+      <if test="des != null">
+        des = #{des,jdbcType=VARCHAR},
+      </if>
+      <if test="cost != null">
+        cost = #{cost,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null">
+        supplier_id = #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="date != null">
+        date = #{date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
+      </if>
+    </set>
+    where pro_id = #{proId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fs.model.Product">
+    update product
+    set picture = #{picture,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      bround = #{bround,jdbcType=VARCHAR},
+      catagorg = #{catagorg,jdbcType=VARCHAR},
+      des = #{des,jdbcType=VARCHAR},
+      cost = #{cost,jdbcType=VARCHAR},
+      price = #{price,jdbcType=VARCHAR},
+      supplier_id = #{supplierId,jdbcType=INTEGER},
+      date = #{date,jdbcType=TIMESTAMP},
+      number = #{number,jdbcType=INTEGER}
+    where pro_id = #{proId,jdbcType=INTEGER}
+  </update>
+  
+  <select id="product_info" parameterType="java.util.List" resultMap="BaseResultMap">
+  select p.*,s.company from product p LEFT OUTER JOIN supplier s on p.supplier_id = s.supplier_id
+  </select>
+  <select id="Q_selectMess" parameterType="java.util.List" resultMap="BaseResultMap">
+  
+   select * from (select p.*,s.company from product p LEFT OUTER JOIN supplier s on p.supplier_id = s.supplier_id ) a
+   where 1=1
+  	 <if test="selectMess2 != null or selectMess2 !=''">
+  	 	and a.pro_id like #{selectMess2} or a.name like #{selectMess2} or a.bround like #{selectMess2} or a.company like #{selectMess2}
+  	 	
+  	 	 
+  	 </if>
+  	 
+  
+  </select>
+  <select id="Q_selectMessPageCount" resultType="java.lang.Integer">
+  
+  select count(*) from
+  ( select * from (select p.*,s.company from product p LEFT OUTER JOIN supplier s on p.supplier_id = s.supplier_id ) a
+   where 1=1
+  	 <if test="selectMess2 != null or selectMess2 !=''">
+  	 	and a.pro_id like #{selectMess2} or a.name like #{selectMess2} or a.bround like #{selectMess2} or a.company like #{selectMess2}
+  	 	
+  	 	 
+  	 </if>
+  
+  ) b
+  
+  
+  </select>
+  
+  <select id="Q_ProselectPage" parameterType="java.util.List"  resultMap="BaseResultMap" >
+  
+  select * from product limit #{start},#{row}
+  </select>
+  
+  <select  id="Q_ProselectPageCount" resultType="java.lang.Integer" > 
+   select count(*) from product 
+  </select>
+   <!-- 订单管理模块：订单号搜索框自动补全orderId -->
+ <select id="queryOrderId" resultType="java.lang.String">
+ 	select concat(name) as autoOrderId from product
+ </select>
+</mapper>

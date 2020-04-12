@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fs.mapper.CustomerMapper">
+
+<select id="client_info2" parameterType="java.util.List" resultType="com.fs.model.Customer">
+
+select * from customer limit #{start},#{row}
+
+
+</select>
+<select id="client_info" parameterType="java.util.List" resultType="com.fs.model.Customer">
+
+select * from customer 
+
+
+</select>
+
+<select id="client_infoPageCount" resultType="java.lang.Integer" >
+select count(*) from customer
+</select>
+<delete id="Q_updatecusMessage" >
+delete from customer where cus_id =#{cus_id}
+</delete>
+<select id="Q_selectCustomer"  resultType="com.fs.model.Customer">
+select * from customer where cus_id =#{cus_id}
+</select>
+<update id="Q_CusUpdateByMess" parameterType="com.fs.model.Customer">
+update customer set cus_company_name=#{cus_company_name},cus_username=#{cus_username},
+		cus_sex=#{cus_sex},cus_tel=#{cus_tel},cus_email=#{cus_email},cus_address=#{cus_address} 
+		 where cus_id=#{cus_id}
+
+</update>
+
+<insert id="Q_CusInsertByMess" parameterType="com.fs.model.Customer">
+insert into customer(cus_company_name,cus_username,cus_sex,cus_tel,cus_email,cus_address) values(#{cus_company_name},#{cus_username},
+						#{cus_sex},#{cus_tel},#{cus_email},#{cus_address})
+
+</insert>
+
+<select id="Q_SelectMessage" parameterType="java.util.List"  resultType="com.fs.model.Customer">
+
+select * from customer where 1=1
+ <if test="_parameter!='' and _parameter!=null  " >
+  	and cus_company_name like #{_parameter} or cus_username like #{_parameter} or cus_sex like #{_parameter}
+  		or cus_tel like #{_parameter} or cus_email like #{_parameter} or cus_address like #{_parameter}
+ 
+ </if>
+
+
+</select>
+</mapper>
